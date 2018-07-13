@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>局部组件</title>
+    <script src="importVueFile/vue.development.js"></script>
+</head>
+<body>
+	<script type="text/x-template" id="lilist">
+		<div>
+			<button @click='add'>我是局部组件:{{m2}}</button>
+			<button @click='clear'>将m2的值回到初始值</button>
+			<li v-for='item in txt'>
+				{{item.name}} {{item.age}}
+			</li>
+		</div>
+	</script>
+	<!-- 每一个模板的里面都要有一个div -->
+    <div id="app1">
+		<child-component></child-component>
+	</div>
+    <script>
+		//局部组件注册
+		new Vue({
+			el: "#app1",
+			components:{
+				"child-component":{
+					template:"#lilist",
+					data:function(){
+						return {
+							m2:1,
+							txt:[
+								{name:'aaa',age:'11'},
+								{name:'bbb',age:'22'}
+							]
+						}
+					},
+					methods:{
+						add:function(){
+							this.m2++
+						},
+						clear:function(){
+							this.m2==1
+						}
+					}
+				}
+			}
+		})
+    </script>
+</body>
+
+</html>
